@@ -1,13 +1,15 @@
-(ns date-utils.core-test
+(ns date-utils.core-date-test
   (:use clojure.test
         date-utils.core)
   (:import java.util.GregorianCalendar
            java.text.ParseException))
 
 (deftest parse-normal-year
+  (is (= (.getTime (GregorianCalendar. 1900 0 0)) 
+         (parse "19")))
   (is (= (.getTime (GregorianCalendar. 2010 0 0)) 
          (parse "2010")))
-  (is (= (.getTime (GregorianCalendar. 1700 0 0)) 
+    (is (= (.getTime (GregorianCalendar. 1700 0 0)) 
          (parse "1700")))
   (is (= (.getTime (GregorianCalendar. 3000 0 0)) 
          (parse "3000"))))

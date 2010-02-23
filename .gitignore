@@ -11,5 +11,6 @@ classes
 *.ser
 *.class
 *.classpath
+*.dot
 pom.xml
 src/jvm/date_utils/ISO8601DateFormatter.java

@@ -2,6 +2,7 @@
   machine ISO8601_date;
   
   action set_year { year = Integer.parseInt(new String(data, ts, 4)); }
+  action set_two_digit_year { year = Integer.parseInt((new String(data, ts, 2)) + "00"); }
   action set_month { month = Integer.parseInt(new String(data, ts, 2)); }
   action set_day { day = Integer.parseInt(new String(data, ts, 2)); }
   
@@ -51,9 +52,12 @@
      (('02'  >tag @set_month) . '-' . days_28));
   normal_year_month_day = normal_year_month_day1 | normal_year_month_day2;
   
+  two_digit_year = digit{2} >tag @set_two_digit_year;
   
   leap_date = leap_year | leap_year_month | leap_year_month_day;
   normal_date = normal_year | normal_year_month | normal_year_month_day;
+  calendar_date = two_digit_year | leap_date | normal_date;
+  complete_calendar_date = leap_year_month_day | normal_year_month_day;
   
   # TODO: Implement the week date.
   week_date = '';
@@ -61,5 +65,5 @@
   # TODO: Implement ordinal dates.
   ordinal_date = '';
   
-  date = leap_date | normal_date | week_date | ordinal_date;
+  date = calendar_date; # | week_date | ordinal_date;
 }%%

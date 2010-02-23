@@ -9,11 +9,16 @@ import java.util.GregorianCalendar;
   machine ISO8601;
   
   action tag { ts = p; }
+  action set_date { 
+	month--; // The month is 0 based for the GregorianCalendar
+	calendar = new GregorianCalendar(year, month, day, hour, min, sec); 
+  }
   
   include ISO8601_date "ISO8601_date.rl";
   include ISO8601_time "ISO8601_time.rl";
   
-    main := date; # | time | (date . 'T' . time);
+  main := (date | (complete_calendar_date . ('T' | ' ') . time)) %/ set_date;
+  
 }%%
 
 public class ISO8601DateFormatter {
@@ -28,18 +33,16 @@ public class ISO8601DateFormatter {
         int p = 0;
         int pe = eof;
         int year = 0, month = 1, day = 0, hour = 0, min = 0, sec = 0;
-        
+		GregorianCalendar calendar = null;
+
         %% write init;
         %% write exec;
         
-        if (cs == ISO8601_error) {
+        if (cs == ISO8601_error || calendar == null) {
             throw new ParseException("Unparseable Date.", p);
         }
-        
-        month--; // The month is 0 based for the GregorianCalendar
-        
-        GregorianCalendar c = new GregorianCalendar(year, month, day, hour, min, sec);
-        return c.getTime();
+
+        return calendar.getTime();
     }
     
 }
