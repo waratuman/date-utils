@@ -1,0 +1,15 @@
+*~
+.DS_Store
+*#
+.#*
+pom-generated.xml
+Manifest.txt
+com.waratuman.clojure.latex.jar
+lib
+classes
+*.jar
+*.ser
+*.class
+*.classpath
+pom.xml
+src/jvm/date_utils/ISO8601DateFormatter.java
