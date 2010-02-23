@@ -1,14 +1,19 @@
 # date-utils
 
-FIXME: write description
-
 ## Usage
 
-FIXME: write
+    (ns my-namespace
+      (:use date-utils.core))
 
 ## Installation
 
-FIXME: write
+### Dependencies
+- Ragel
+
+    cd src/jvm/date_utils
+    ragel -J ISO8601DateFormatter.rl
+    cd ../../
+    lein deps && lein compile-java && lein compile && lein test
 
 ## License
 
