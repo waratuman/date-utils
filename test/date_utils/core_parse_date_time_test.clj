@@ -1,4 +1,4 @@
-(ns date-utils.core-date-time-test
+(ns date-utils.core-parse-date-time-test
   (:use clojure.test
         date-utils.core)
   (:import java.util.GregorianCalendar
@@ -38,6 +38,7 @@
   (is (thrown? ParseException (parse "20040131T23-12")))
   (is (thrown? ParseException (parse "20040131T232")))
   (is (thrown? ParseException (parse "20040131T23121")))
+  (is (thrown? ParseException (parse "20040131T23121:23")))
   (is (thrown? ParseException (parse "20040131T23-12-13"))))
 
 ;; (deftest parse-decimal-time

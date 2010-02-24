@@ -15,5 +15,6 @@
   hour_min = hour . ':'{0,1} . min;
   hour_min_sec = (hour . min . sec) | (hour . ':' . min . ':' . sec);
   
+  # TODO: Add support for fractions.
   time = hour | hour_min | hour_min_sec;
 }%%

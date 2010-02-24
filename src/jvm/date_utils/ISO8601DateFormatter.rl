@@ -1,6 +1,7 @@
 package date_utils;
 
 import java.util.Date;
+import java.util.TimeZone;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
 
@@ -10,14 +11,16 @@ import java.util.GregorianCalendar;
   
   action tag { ts = p; }
   action set_date { 
-	month--; // The month is 0 based for the GregorianCalendar
-	calendar = new GregorianCalendar(year, month, day, hour, min, sec); 
+	  month--; // The month is 0 based for the GregorianCalendar
+	  calendar = new GregorianCalendar(year, month, day, hour, min, sec);
+	  calendar.setTimeZone(zone);
   }
   
   include ISO8601_date "ISO8601_date.rl";
   include ISO8601_time "ISO8601_time.rl";
+  include ISO8601_time_zone "ISO8601_time_zone.rl";
   
-  main := (date | (complete_calendar_date . ('T' | ' ') . time)) %/ set_date;
+  main := (date | (complete_calendar_date . ('T' | ' ') . time . zone_designator)) %/ set_date;
   
 }%%
 
@@ -33,7 +36,8 @@ public class ISO8601DateFormatter {
         int p = 0;
         int pe = eof;
         int year = 0, month = 1, day = 0, hour = 0, min = 0, sec = 0;
-		GregorianCalendar calendar = null;
+        TimeZone zone = TimeZone.getDefault();
+		    GregorianCalendar calendar = null;
 
         %% write init;
         %% write exec;
@@ -41,7 +45,7 @@ public class ISO8601DateFormatter {
         if (cs == ISO8601_error || calendar == null) {
             throw new ParseException("Unparseable Date.", p);
         }
-
+        
         return calendar.getTime();
     }
     

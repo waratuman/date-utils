@@ -1,4 +1,4 @@
-(ns date-utils.core-date-test
+(ns date-utils.core-parse-date-test
   (:use clojure.test
         date-utils.core)
   (:import java.util.GregorianCalendar
