@@ -21,15 +21,15 @@
 
 
 (deftest parse-date-time
-  (is (= (.getTime (GregorianCalendar. 2004 0 31 23 0 0))
+  (is (= (GregorianCalendar. 2004 0 31 23 0 0)
          (parse "20040131T23")))
-  (is (= (.getTime (GregorianCalendar. 2004 0 31 23 12 0))
+  (is (= (GregorianCalendar. 2004 0 31 23 12 0)
          (parse "20040131T2312")))
-  (is (= (.getTime (GregorianCalendar. 2004 0 31 23 12 0))
+  (is (= (GregorianCalendar. 2004 0 31 23 12 0)
          (parse "20040131T23:12")))
-  (is (= (.getTime (GregorianCalendar. 2004 0 31 23 12 13))
+  (is (= (GregorianCalendar. 2004 0 31 23 12 13)
          (parse "20040131T231213")))
-  (is (= (.getTime (GregorianCalendar. 2004 0 31 23 12 13))
+  (is (= (GregorianCalendar. 2004 0 31 23 12 13)
          (parse "20040131T23:12:13"))))
 
 
@@ -42,17 +42,17 @@
   (is (thrown? ParseException (parse "20040131T23-12-13"))))
 
 ;; (deftest parse-decimal-time
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T23.5")))
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T23,5")))
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T2312.5")))
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T2312,5")))
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T231213.5")))
-;;   (is (= (.getTime (GregorianCalendar. 2004 0 31))
+;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T231213,5"))))
 
 

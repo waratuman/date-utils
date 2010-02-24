@@ -27,7 +27,7 @@
 
 (defn date-from-cal [cal year month day hour min sec]
   (.set cal year month day hour min sec)
-  (.getTime cal))
+  cal)
 
 (deftest parse-date-time
   (is (= (date-from-cal utc-calendar 2004 0 31 23 0 0)

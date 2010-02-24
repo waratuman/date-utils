@@ -28,7 +28,7 @@ public class ISO8601DateFormatter {
     
     %% write data;
     
-    public static Date parse(String string) throws ParseException {
+    public static GregorianCalendar parse(String string) throws ParseException {
         char[] data = string.toCharArray();
         int cs;
         int ts = 0;
@@ -46,7 +46,7 @@ public class ISO8601DateFormatter {
             throw new ParseException("Unparseable Date.", p);
         }
         
-        return calendar.getTime();
+        return calendar;
     }
     
 }
