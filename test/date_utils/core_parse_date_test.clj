@@ -5,31 +5,31 @@
            java.text.ParseException))
 
 (deftest parse-normal-year
-  (is (= (GregorianCalendar. 1900 0 0) 
+  (is (= (GregorianCalendar. 1900 0 1) 
          (parse "19")))
-  (is (= (GregorianCalendar. 2010 0 0) 
+  (is (= (GregorianCalendar. 2010 0 1) 
          (parse "2010")))
-    (is (= (GregorianCalendar. 1700 0 0) 
+    (is (= (GregorianCalendar. 1700 0 1) 
          (parse "1700")))
-  (is (= (GregorianCalendar. 3000 0 0) 
+  (is (= (GregorianCalendar. 3000 0 1)
          (parse "3000"))))
 
 (deftest parse-leap-year
-  (is (= (GregorianCalendar. 2000 0 0) 
+  (is (= (GregorianCalendar. 2000 0 1) 
          (parse "2000")))
-  (is (= (GregorianCalendar. 2004 0 0) 
+  (is (= (GregorianCalendar. 2004 0 1) 
          (parse "2004"))))
 
 (deftest parse-normal-year-month
-  (is (= (GregorianCalendar. 2001 1 0)
+  (is (= (GregorianCalendar. 2001 1 1)
          (parse "2001-02")))
-  (is (= (GregorianCalendar. 1700 1 0) 
+  (is (= (GregorianCalendar. 1700 1 1) 
          (parse "1700-02"))))
 
 (deftest parse-leap-year-month
-  (is (= (GregorianCalendar. 2000 1 0)
+  (is (= (GregorianCalendar. 2000 1 1)
          (parse "2000-02")))
-  (is (= (GregorianCalendar. 2004 1 0) 
+  (is (= (GregorianCalendar. 2004 1 1) 
          (parse "2004-02"))))
 
 (deftest parse-normal-year-month-day

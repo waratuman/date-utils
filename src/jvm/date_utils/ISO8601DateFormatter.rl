@@ -35,7 +35,7 @@ public class ISO8601DateFormatter {
         int eof = data.length;
         int p = 0;
         int pe = eof;
-        int year = 0, month = 1, day = 0, hour = 0, min = 0, sec = 0;
+        int year = 1970, month = 1, day = 1, hour = 0, min = 0, sec = 0;
         TimeZone zone = TimeZone.getDefault();
 		    GregorianCalendar calendar = null;
 
