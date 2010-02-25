@@ -5,15 +5,21 @@
     (ns my-namespace
       (:use date-utils.core))
 
+    (date 2009 1 3 4 5 6)
+    (parse "2009-01-01T14:15:16Z")
+
 ## Installation
 
+   cd src/jvm/date_utils
+   ragel -J ISO8601DateFormatter.rl
+   cd ../../
+   lein deps && lein compile-java && lein compile && lein test && lein install
+
 ### Dependencies
+
 - Ragel
 
-    cd src/jvm/date_utils
-    ragel -J ISO8601DateFormatter.rl
-    cd ../../
-    lein deps && lein compile-java && lein compile && lein test
+    
 
 ## License
 
