@@ -10,9 +10,7 @@
 
 ## Installation
 
-   cd src/jvm/date_utils
-   ragel -J ISO8601DateFormatter.rl
-   cd ../../
+   ragel -J src/jvm/date_utils/ISO8601DateParser.rl
    lein deps && lein compile-java && lein compile && lein test && lein install
 
 ### Dependencies
