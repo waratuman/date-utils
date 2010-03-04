@@ -1,9 +1,9 @@
 (ns date-utils.core
   (:import java.util.GregorianCalendar
-           date_utils.ISO8601DateFormatter))
+           date_utils.ISO8601DateParser))
 
 (defn parse [string]
-  (ISO8601DateFormatter/parse string))
+  (ISO8601DateParser/parse string))
 
 (defn date
   ([]

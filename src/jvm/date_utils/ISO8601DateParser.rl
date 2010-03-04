@@ -24,7 +24,7 @@ import java.util.GregorianCalendar;
   
 }%%
 
-public class ISO8601DateFormatter {
+public class ISO8601DateParser {
     
     %% write data;
     
