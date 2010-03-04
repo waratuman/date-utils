@@ -2,27 +2,39 @@
   (:use clojure.test
         date-utils.core)
   (:import java.util.GregorianCalendar))
-  
+
+(defn gregorian-calendar
+  ([year] (gregorian-calendar year 1 1 0 0 0))
+  ([year month] (gregorian-calendar year month 1 0 0 0))
+  ([year month day] (gregorian-calendar year month day 0 0 0))
+  ([year month day hour min sec]
+     (let [cal (GregorianCalendar. year (- month 1) day hour min sec)]
+       cal)))
+
 (deftest date-test
   (is date)
-  (is (= (GregorianCalendar. 2004 0 1)
+  (is (= (gregorian-calendar 2004 1 1)
          (date 2004)))
-  (is (= (GregorianCalendar. 2004 1 1)
+  (is (= (gregorian-calendar 2004 2 1)
         (date 2004 2)))
-  (is (= (GregorianCalendar. 2004 1 2)
+  (is (= (gregorian-calendar 2004 2 2)
         (date 2004 2 2)))
-  (is (= (GregorianCalendar. 2004 0 1 0 0 0)
+  (is (= (gregorian-calendar 2004 1 1 0 0 0)
          (date 2004)))
-  (is (= (GregorianCalendar. 2004 1 1 0 0 0)
+  (is (= (gregorian-calendar 2004 2 1 0 0 0)
         (date 2004 2)))
-  (is (= (GregorianCalendar. 2004 1 2 0 0 0)
+  (is (= (gregorian-calendar 2004 2 2 0 0 0)
         (date 2004 2 2)))
-  (is (= (GregorianCalendar. 2004 1 2 3 0 0)
+  (is (= (gregorian-calendar 2004 2 2 3 0 0)
          (date 2004 2 2 3)))
-  (is (= (GregorianCalendar. 2004 1 2 3 4 0)
+  (is (= (gregorian-calendar 2004 2 2 3 4 0)
         (date 2004 2 2 3 4)))
-  (is (= (GregorianCalendar. 2004 1 2 3 4 5)
+  (is (= (gregorian-calendar 2004 2 2 3 4 5)
         (date 2004 2 2 3 4 5))))
+
+(deftest ordinal-date-test
+  (is (= (gregorian-calendar 2001)
+         (ordinal-date 2001 1))))
 
 (deftest year-test
   (is (= 2004

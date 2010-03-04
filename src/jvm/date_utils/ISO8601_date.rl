@@ -5,6 +5,7 @@
   action set_two_digit_year { year = Integer.parseInt((new String(data, ts, 2)) + "00"); }
   action set_month { month = Integer.parseInt(new String(data, ts, 2)); }
   action set_day { day = Integer.parseInt(new String(data, ts, 2)); }
+  action set_day_of_year { dayOfYear = Integer.parseInt(new String(data, ordinalTag, 3)); }
   
   days_31 = (('0' . [1-9]) | 
              (('1' | '2') . [0-9]) | 
@@ -52,18 +53,22 @@
      (('02'  >tag @set_month) . '-' . days_28));
   normal_year_month_day = normal_year_month_day1 | normal_year_month_day2;
   
-  two_digit_year = digit{2} >tag @set_two_digit_year;
+  two_digit_year = digit{2} >tag %/set_two_digit_year;
   
   leap_date = leap_year | leap_year_month | leap_year_month_day;
   normal_date = normal_year | normal_year_month | normal_year_month_day;
   calendar_date = (two_digit_year | leap_date | normal_date) %/set_calendar_date;
   complete_calendar_date = (leap_year_month_day | normal_year_month_day) %set_calendar_date;
   
+  # TODO: Implement ordinal dates.
+  ordinal_leap_days = ([0-3] . [0-6] . [0-6]) - '000';
+  ordinal_normal_days = ordinal_leap_days - '366';
+  ordinal_date = ((leap_year . '-'{0,1} . (ordinal_leap_days >ordinal_tag %set_day_of_year)) |
+      (normal_year . '-'{0,1} . (ordinal_normal_days >ordinal_tag %set_day_of_year)))
+    %set_ordinal_date;
+
   # TODO: Implement the week date.
   week_date = '';
   
-  # TODO: Implement ordinal dates.
-  ordinal_date = '';
-  
-  date = calendar_date; # | week_date | ordinal_date;
+  date = calendar_date | ordinal_date; # | week_date;
 }%%

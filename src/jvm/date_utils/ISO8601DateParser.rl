@@ -10,10 +10,20 @@ import java.util.GregorianCalendar;
   machine ISO8601;
   
   action tag { ts = p; }
+  action ordinal_tag { ordinalTag = p; }
   action set_calendar_date { 
     month--; // The month is 0 based for the GregorianCalendar
-    calendar = new GregorianCalendar(year, month, day, hour, min, sec);
+    calendar.set(GregorianCalendar.YEAR, year);
+    calendar.set(GregorianCalendar.MONTH, month);
+    calendar.set(GregorianCalendar.DAY_OF_MONTH, day);
+    calendar.set(GregorianCalendar.HOUR, hour);
+    calendar.set(GregorianCalendar.MINUTE, min);
+    calendar.set(GregorianCalendar.SECOND, sec);
   }
+  action set_ordinal_date {
+    calendar.set(GregorianCalendar.YEAR, year);
+    calendar.set(GregorianCalendar.DAY_OF_YEAR, dayOfYear);
+  } 
   action set_time {
     calendar.set(GregorianCalendar.HOUR, hour);
     calendar.set(GregorianCalendar.MINUTE, min);
@@ -27,8 +37,8 @@ import java.util.GregorianCalendar;
   include ISO8601_time "ISO8601_time.rl";
   include ISO8601_time_zone "ISO8601_time_zone.rl";
   
-  main := (date | (complete_calendar_date . ('T' | ' ') . time . zone_designator)) %/finish;
-  
+
+  main := (date | ((complete_calendar_date | ordinal_date) . ('T' | ' ') . time . zone_designator)) %/finish;
 }%%
 
 public class ISO8601DateParser {
@@ -38,14 +48,15 @@ public class ISO8601DateParser {
     public static GregorianCalendar parse(String string) throws ParseException {
         char[] data = string.toCharArray();
         int cs;
-        int ts = 0;
+        int ts = 0, ordinalTag = 0;
         int eof = data.length;
         int p = 0;
         int pe = eof;
         int year = 1970, month = 1, day = 1, hour = 0, min = 0, sec = 0;
         boolean parseFinished = false;
+        int dayOfYear = 0;
         TimeZone zone = TimeZone.getDefault();
-		    GregorianCalendar calendar = null;
+        GregorianCalendar calendar = new GregorianCalendar(year, month-1, day, hour, min, sec);
 
         %% write init;
         %% write exec;
@@ -55,7 +66,6 @@ public class ISO8601DateParser {
         }
         
         calendar.setTimeZone(zone);
-        
         return calendar;
     }
     

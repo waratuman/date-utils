@@ -41,6 +41,20 @@
   (is (thrown? ParseException (parse "20040131T23121:23")))
   (is (thrown? ParseException (parse "20040131T23-12-13"))))
 
+(deftest parse-ordinal-date-time
+  (is (= (GregorianCalendar. 2004 0 13 23 0 0)
+         (parse "2004013T23")))
+  (is (= (GregorianCalendar. 2004 0 13 23 0 0)
+         (parse "2004-013T23")))
+  (is (= (GregorianCalendar. 2004 0 13 23 12 0)
+         (parse "2004013T2312")))
+  (is (= (GregorianCalendar. 2004 0 13 23 12 0)
+         (parse "2004013T23:12")))
+  (is (= (GregorianCalendar. 2004 0 13 23 12 13)
+         (parse "2004013T231213")))
+  (is (= (GregorianCalendar. 2004 0 13 23 12 13)
+         (parse "2004013T23:12:13"))))
+
 ;; (deftest parse-decimal-time
 ;;   (is (= (GregorianCalendar. 2004 0 31)
 ;;          (parse "20040131T23.5")))
