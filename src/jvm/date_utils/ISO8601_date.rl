@@ -56,8 +56,8 @@
   
   leap_date = leap_year | leap_year_month | leap_year_month_day;
   normal_date = normal_year | normal_year_month | normal_year_month_day;
-  calendar_date = two_digit_year | leap_date | normal_date;
-  complete_calendar_date = leap_year_month_day | normal_year_month_day;
+  calendar_date = (two_digit_year | leap_date | normal_date) %/set_calendar_date;
+  complete_calendar_date = (leap_year_month_day | normal_year_month_day) %set_calendar_date;
   
   # TODO: Implement the week date.
   week_date = '';
