@@ -78,12 +78,12 @@
   (is (= -86400
         (difference (date 2009 1 2) (date 2009 1 1)))))
 
-(deftest later?-test
-  (is (later? (date 2010) (date 2009)))
+(deftest after?-test
+  (is (after? (date 2010) (date 2009)))
   (is (= false
-         (later? (date 2009) (date 2010)))))
+         (after? (date 2009) (date 2010)))))
 
-(deftest earlier?-test
-  (is (earlier? (date 2009) (date 2010)))
+(deftest before?-test
+  (is (before? (date 2009) (date 2010)))
   (is (= false
-         (earlier? (date 2010) (date 2009)))))
+         (before? (date 2010) (date 2009)))))

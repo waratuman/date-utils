@@ -54,8 +54,8 @@
    (/ (- (.getTimeInMillis b) (.getTimeInMillis a))
       1000))
 
-(defn later? [a b]
+(defn after? [a b]
   (> 0 (difference a b)))
 
-(defn earlier? [a b]
+(defn before? [a b]
   (< 0 (difference a b)))
