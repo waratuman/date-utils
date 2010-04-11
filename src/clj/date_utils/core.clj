@@ -47,6 +47,13 @@
 (defn seconds [cal]
   (.get cal GregorianCalendar/SECOND))
 
+(defn add [cal a]
+  "Add `a` seconds ot the date `cal`. For example
+   `(add (date 2009 1 1) 3600)`."
+   (let [c (.clone cal)]
+     (.add c GregorianCalendar/SECOND a)
+     c))
+
 (defn difference [a b]
   "The number of seconds that date `a` differs from date `b`. For
    example: `(difference (date 2009 1 1) (parse 2009 1 2))` results

@@ -72,6 +72,12 @@
   (is (= 49
          (seconds (date 1913 2 1 1 20 49)))))
 
+(deftest add-test
+  (is (= (date 2009 1 2)
+         (add (date 2009 1 1) 86400)))
+  (is (= (date 2009 1 1)
+         (add (date 2009 1 2) -86400))))
+
 (deftest difference-test
   (is (= 86400
          (difference (date 2009 1 1) (date 2009 1 2))))
